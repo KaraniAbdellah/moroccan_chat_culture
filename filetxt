@@ -1,3 +1,0 @@
-git add .
-git commit -m "Fix: Remove sensitive credentials"
-git push origin main
