@@ -1,4 +1,6 @@
-*/.env
 .env
 learn/
+learn
 tasks.txt
+./tasks.txt
+
