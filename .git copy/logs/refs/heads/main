@@ -1,0 +1,27 @@
+0000000000000000000000000000000000000000 ee09955966888041da0310089415aa8886b7ccc4 KaraniAbdellah <abdellahkarani@gmail.com> 1779304212 +0100	clone: from github.com:KaraniAbdellah/moroccan_chat_culture.git
+ee09955966888041da0310089415aa8886b7ccc4 65b8944ce9cb8457b6635ee8775bb3ca4db35ad2 KaraniAbdellah <abdellahkarani@gmail.com> 1779308421 +0100	commit: feat: add .env and start get emebedding
+65b8944ce9cb8457b6635ee8775bb3ca4db35ad2 617b63b50a932339e632fe7f2eb60315ca3bd079 KaraniAbdellah <abdellahkarani@gmail.com> 1779308491 +0100	commit: feat: add gitignore and .env.example
+617b63b50a932339e632fe7f2eb60315ca3bd079 2c0edbafa25861461edcbd1a33bc9604815a2b8c KaraniAbdellah <abdellahkarani@gmail.com> 1779569475 +0100	commit: feat: add chroma Db and start storing chunks
+2c0edbafa25861461edcbd1a33bc9604815a2b8c aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca KaraniAbdellah <abdellahkarani@gmail.com> 1779572186 +0100	commit: fea: switch to QDrant cloud
+aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca 57ccbfdb3464e113272b37b2784bbdfbf82f0498 KaraniAbdellah <abdellahkarani@gmail.com> 1780680632 +0100	commit: feat: establish Connection With VDB QDrant Cloud
+57ccbfdb3464e113272b37b2784bbdfbf82f0498 aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca KaraniAbdellah <abdellahkarani@gmail.com> 1780680853 +0100	reset: moving to aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca
+aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca 5d6f89020e837f4f771a9cf375c38391e00b4d3e KaraniAbdellah <abdellahkarani@gmail.com> 1780680940 +0100	commit: test commit
+5d6f89020e837f4f771a9cf375c38391e00b4d3e aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca KaraniAbdellah <abdellahkarani@gmail.com> 1780681006 +0100	reset: moving to aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca
+aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca e3246e6b04ac815b90ab73c8a49edd93f9ded51a KaraniAbdellah <abdellahkarani@gmail.com> 1780681038 +0100	commit: reset branch
+e3246e6b04ac815b90ab73c8a49edd93f9ded51a aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca KaraniAbdellah <abdellahkarani@gmail.com> 1780681327 +0100	reset: moving to HEAD~1
+aeebd0179cd0a7daa3631eb3c0287d43f8a8d5ca 749cc0b4493475408ce7b5c83b727eec210cf833 KaraniAbdellah <abdellahkarani@gmail.com> 1780681335 +0100	commit: Fix: Remove sensitive credentials
+749cc0b4493475408ce7b5c83b727eec210cf833 ee09955966888041da0310089415aa8886b7ccc4 KaraniAbdellah <abdellahkarani@gmail.com> 1780681433 +0100	reset: moving to ee09955966888041da0310089415aa8886b7ccc4
+ee09955966888041da0310089415aa8886b7ccc4 09eeaedff917aa7949a69350acc9c96251dcdea6 KaraniAbdellah <abdellahkarani@gmail.com> 1780681446 +0100	commit: feat: add
+09eeaedff917aa7949a69350acc9c96251dcdea6 d50880f19bb13b93f9461b76c6e822893313df49 KaraniAbdellah <abdellahkarani@gmail.com> 1780681552 +0100	commit: reset project
+d50880f19bb13b93f9461b76c6e822893313df49 78476bac4ba55efcecc01821fa6f77e44b6df0b1 KaraniAbdellah <abdellahkarani@gmail.com> 1780791384 +0100	commit: feat: define pipeline for Store Chunks and Retreive from HF
+78476bac4ba55efcecc01821fa6f77e44b6df0b1 05854fb93a5ad93673c3227ed0415845e31d371f KaraniAbdellah <abdellahkarani@gmail.com> 1780791412 +0100	commit: feat: define pipeline for Store Chunks and Retreive from HF
+05854fb93a5ad93673c3227ed0415845e31d371f 9acb39345c8ea59196277c077c6e2488d33a6536 KaraniAbdellah <abdellahkarani@gmail.com> 1780791569 +0100	commit: feat: add PIPLINE for retreive and store in cloud
+9acb39345c8ea59196277c077c6e2488d33a6536 d50880f19bb13b93f9461b76c6e822893313df49 KaraniAbdellah <abdellahkarani@gmail.com> 1781109013 +0100	reset: moving to d50880f19bb13b93f9461b76c6e822893313df49
+d50880f19bb13b93f9461b76c6e822893313df49 7a8bc384873e51dfa58222d318991d698ea20138 KaraniAbdellah <abdellahkarani@gmail.com> 1781109035 +0100	commit: feat: test reset rempo
+7a8bc384873e51dfa58222d318991d698ea20138 7d503b5d37ce823eaa2cf789377443717b27f995 KaraniAbdellah <abdellahkarani@gmail.com> 1781109170 +0100	commit: feat: add projeft
+7d503b5d37ce823eaa2cf789377443717b27f995 cf47c3cf457109fc444b52e7001f6935c8c16650 KaraniAbdellah <abdellahkarani@gmail.com> 1781192801 +0100	commit: feat: add heybrid Search with qdrant
+cf47c3cf457109fc444b52e7001f6935c8c16650 44904e2632e5449665d2941f00613c706d7a2a25 KaraniAbdellah <abdellahkarani@gmail.com> 1781370874 +0100	commit: feat: add feature for get Hyde Documents
+44904e2632e5449665d2941f00613c706d7a2a25 3d798f114e4da14f944085812dc9abe0c76264d7 KaraniAbdellah <abdellahkarani@gmail.com> 1782058252 +0100	commit: feat: SUCCESS ADD 10K in Cloud and Generate Reponse Based on Context
+3d798f114e4da14f944085812dc9abe0c76264d7 03b87581e148b78fcce24ab27245323ddef39316 KaraniAbdellah <abdellahkarani@gmail.com> 1782163436 +0100	commit: feat: start backend by adding model for predefine function and app.py as root of backend app
+03b87581e148b78fcce24ab27245323ddef39316 659166daecd77f6c5f87c1a5267e0153cd175860 KaraniAbdellah <abdellahkarani@gmail.com> 1782163467 +0100	commit: feat: rm env vars from app.ipynb
+659166daecd77f6c5f87c1a5267e0153cd175860 829f48b3008caa96eb165c283bc597baa670d4c4 KaraniAbdellah <abdellahkarani@gmail.com> 1782314855 +0100	commit: fix: fix endpoint for get-reponse
