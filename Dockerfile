@@ -1,20 +1,22 @@
-# Get Dependecies
-FROM python:3.9
-FROM fastapi
-FROM uvicorn
+# Get Python
+FROM python:3.12-slim
 
 # Create App Folder
 RUN mkdir /app
 
-# Copy Code for Backend
-COPY ./main.py ./mcc_functions.py ./requirements.txt .env /app/
-
 # Move to app Folder
 WORKDIR /app
 
-# Install the Following Packages Inside virtual enverment
-RUN python3 ./requirements.txt
+# Copy Code for Backend
+COPY ./backend_test/main.py ./backend_test/mcc_functions.py ./backend_test/requirements.txt ./backend_test/.env /app/
 
-# Run the Backend App
-RUN uvicorn main:app
+# Install the Following Packages Inside virtual enverment
+RUN pip install -r requirements.txt
+
+
+# docker listen to port 8000
+EXPOSE 8000
+
+# Run the Backend App --> docker run docker-image-name
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 

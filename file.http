@@ -1,6 +1,9 @@
-POST http://127.0.0.1:8000/get-response HTTP/1.1
+POST http://0.0.0.0:8000/get-response HTTP/1.1
 Content-Type: application/json
 
 {
     "question": "شكون هي للا سلمة"
 }
+
+
+// https://portal.azure.com/#@abdellahkaranigmail.onmicrosoft.com/resource/subscriptions/5bfe4899-73ed-4a05-9eb1-4ecad1b1969d/resourceGroups/mcc-backend-docker-group/providers/Microsoft.Web/sites/mcc-backend-docker/vstscd
