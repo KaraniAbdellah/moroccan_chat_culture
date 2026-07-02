@@ -1,41 +1,100 @@
-import React from 'react';
-import { LuLayoutGrid, LuStar } from 'react-icons/lu';
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import tarbouch from "../assets/tarbouch.png";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+export default function Header({ isLightMode }) {
+  const navItems = [
+    { label: "الرئيسية", path: "/" },
+    { label: "الداتا سيت", path: "/dataset" },
+    { label: "المجتمع", path: "/community" },
+  ];
 
-export default function Header() {
   return (
-    <header className="flex items-center justify-between px-5 md:px-8 py-5 bg-transparent absolute top-0 left-0 w-full z-20">
-      {/* Menu */}
-      <button
-        className="flex items-center justify-center bg-[#241C15]/30 hover:bg-[#241C15]/45 text-[#F2E8D5] p-3 rounded-2xl backdrop-blur-md border border-[#F2E8D5]/15 transition-colors shadow-sm"
-        aria-label="Faryan l-menu"
-      >
-        <LuLayoutGrid className="w-5 h-5" />
-      </button>
-
-      {/* Wordmark */}
-      <div className="flex items-center gap-2 select-none">
-        <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-[#C1502E] shadow-md">
-          <LuStar className="w-3.5 h-3.5 text-[#F2E8D5]" />
-        </span>
-        <div className="flex flex-col leading-none">
-          <span
-            className="text-[#F2E8D5] text-lg font-bold tracking-wide"
-            style={{ fontFamily: "'Amiri', serif" }}
-          >
-            Atlas
-          </span>
-          <span className="text-[9px] font-mono uppercase tracking-[0.25em] text-[#D4A017]">
-            Darija AI
-          </span>
+    <header
+      dir="rtl"
+      className={`
+        fixed top-4 left-1/2 -translate-x-1/2 z-50 
+        w-[calc(100%-2rem)] max-w-6xl 
+        rounded-full backdrop-blur-xl transition-all duration-300
+        border
+        ${
+          isLightMode
+            ? "bg-white/80 border-slate-200 shadow-sm"
+            : "bg-slate-950/40 border-white/10"
+        }
+      `}
+    >
+      <div className="h-14 px-5 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-2">
+            <img src={tarbouch} alt="logo" className="w-10 h-10 object-cover" />
+            <div>
+              <h2
+                className={`
+                  text-sm font-semibold tracking-tight
+                  ${isLightMode ? "text-slate-900" : "text-white"}
+                `}
+              >
+                MCC شات AI 🇲🇦
+              </h2>
+              <p className="text-[11px] text-red-600 font-medium">
+                الذكاء الاصطناعي ديال الثقافة المغربية
+              </p>
+            </div>
+          </Link>
         </div>
-      </div>
 
-      {/* Status pill */}
-      <div className="hidden sm:flex items-center gap-1.5 bg-[#241C15]/30 backdrop-blur-md border border-[#F2E8D5]/15 rounded-full px-3.5 py-2 shadow-sm">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#6FA98A] animate-pulse" />
-        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#F2E8D5]/85">
-          Online
-        </span>
+        <nav className="hidden md:flex items-center gap-6">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                `text-sm font-medium transition-colors hover:text-red-700 ${
+                  isLightMode ? "text-slate-600" : "text-slate-300"
+                } ${isActive ? "text-red-700" : ""}`
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <a
+            href="https://www.linkedin.com/in/abdellah-karani-965928294/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
+      flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-200 hover:scale-105
+      ${
+        isLightMode
+          ? "bg-white border-gray-200 text-[#0A66C2] hover:bg-blue-50"
+          : "bg-gray-800 border-gray-700 text-blue-400 hover:bg-gray-700"
+      }
+    `}
+            title="LinkedIn"
+          >
+            <FaLinkedin size={18} />
+          </a>
+
+          <a
+            href="https://github.com/YOUR_GITHUB_USERNAME"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`
+      flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-200 hover:scale-105
+      ${
+        isLightMode
+          ? "bg-white border-gray-200 text-gray-800 hover:bg-gray-100"
+          : "bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
+      }
+    `}
+            title="GitHub"
+          >
+            <FaGithub size={18} />
+          </a>
+        </div>
       </div>
     </header>
   );

@@ -1,188 +1,213 @@
-import React, { useState } from 'react';
-import { FaPlus, FaMicrophone, FaArrowUp } from 'react-icons/fa6';
-import { LuSparkles } from 'react-icons/lu';
+import React, { useState } from "react";
+import { FaMicrophone, FaArrowUp } from "react-icons/fa6";
+import person1 from "../assets/person1.png";
 
-/* A repeating 8-point zellige star, used as a thin decorative seam.
-   Grounded in real Moroccan tilework rather than a generic divider line. */
-function ZelligeSeam({ className = '' }) {
-  return (
-    <svg
-      viewBox="0 0 120 16"
-      preserveAspectRatio="xMidYMid meet"
-      className={className}
-      aria-hidden="true"
-    >
-      <defs>
-        <pattern id="zellige-seam" width="20" height="16" patternUnits="userSpaceOnUse">
-          <path
-            d="M10 1 L13 6 L19 6 L14 9.5 L16 15 L10 11.5 L4 15 L6 9.5 L1 6 L7 6 Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1"
-          />
-        </pattern>
-      </defs>
-      <rect width="120" height="16" fill="url(#zellige-seam)" />
-    </svg>
-  );
-}
-
-/* Small corner star used to frame the console like a mosaic panel. */
-function CornerStar({ className = '' }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-      <path
-        d="M12 1 L15 9 L23 12 L15 15 L12 23 L9 15 L1 12 L9 9 Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-export default function Hero() {
-  const [question, setQuestion] = useState('');
-  const [response, setResponse] = useState('');
+export default function Hero({ isLightMode }) {
+  const [question, setQuestion] = useState("");
+  const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [hasStartedConversation, setHasStartedConversation] = useState(false);
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
-    if (!question.trim()) return;
+    if (!question.trim() || loading) return;
 
+    const userQuestion = question;
+    setHasStartedConversation(true);
     setLoading(true);
-    setResponse('');
+    setResponse("");
+    setQuestion("");
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/get-response', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ question: question }),
+      const API_URL = "http://127.0.0.1:8000/get-response";
+
+      const res = await fetch(`http://0.0.0.0:8000/get-response`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: userQuestion }),
       });
 
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
       const data = await res.json();
-      setResponse(data.response);
-    } catch (error) {
-      console.error('Error fetching response:', error);
-      setResponse("Kayn chi mochkil fl-backend, awwled nass. 'Awd rj3 mn b3d!");
+      setResponse(data.response || "No response from server");
+    } catch (err) {
+      console.error("API ERROR:", err);
+
+      setResponse(
+        "هاد جواب تجريبي 🤖\nأنا Atlas AI، نقدر نعاونك فكل ما يتعلق بالمغرب 🇲🇦",
+      );
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 pt-28 pb-14 text-center max-w-3xl mx-auto">
-      {/* Eyebrow */}
-      <div className="flex items-center gap-2 mb-5 px-3.5 py-1.5 rounded-full bg-[#241C15]/30 border border-[#F2E8D5]/15 backdrop-blur-md">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#D4A017]" />
-        <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.25em] text-[#F2E8D5]/85">
-          Atlas AI &middot; Culture Engine
-        </span>
-      </div>
+    <section
+      dir="rtl"
+      className={`relative flex items-center justify-center min-h-screen ${
+        isLightMode ? "" : "bg-slate-950"
+      }`}
+    >
+      <div className="relative w-full max-w-4xl">
+        {!hasStartedConversation && (
+          <>
+            <div className="px-8 pt-8 pb-5 text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-100 border border-yellow-300 text-yellow-800 text-xs font-medium">
+                🤗
+                <span>Powered by</span>
+                <a
+                  href="https://huggingface.co/datasets/AtlasIA/Atlas-Dialogs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold hover:underline"
+                >
+                  Atlas AI Dataset
+                </a>
+              </div>
 
-      {/* Title */}
-      <div className="space-y-3 mb-9 select-none">
-        <h1
-          dir="rtl"
-          className="text-4xl md:text-6xl font-bold text-[#F8F1E1] tracking-tight drop-shadow-md"
-          style={{ fontFamily: "'Amiri', serif" }}
-        >
-          دردشة الأطلس
-        </h1>
-        <p className="text-lg md:text-xl text-[#F2E8D5]/90 font-medium max-w-xl mx-auto drop-shadow-sm">
-          Swwl f'ayi haja dynamic katkhss l-tqafa w l-a3raf dylna 🇲🇦
-        </p>
-      </div>
+              <img
+                src={person1}
+                alt="Atlas AI"
+                className="w-56 h-56 mx-auto mt-8 object-contain drop-shadow-xl"
+              />
 
-      {/* Console */}
-      <div className="relative w-full max-w-2xl">
-        <CornerStar className="absolute -top-2.5 -left-2.5 w-5 h-5 text-[#D4A017] z-10" />
-        <CornerStar className="absolute -top-2.5 -right-2.5 w-5 h-5 text-[#D4A017] z-10" />
-        <CornerStar className="absolute -bottom-2.5 -left-2.5 w-5 h-5 text-[#D4A017] z-10" />
-        <CornerStar className="absolute -bottom-2.5 -right-2.5 w-5 h-5 text-[#D4A017] z-10" />
+              <p
+                className={`mt-5 max-w-2xl mx-auto leading-8 ${
+                  isLightMode ? "text-gray-500" : "text-slate-400"
+                }`}
+              >
+                🇲🇦 إسول Atlas AI على أي حاجة على المغرب 🕌🏙️🍽️🎭، وغادي يجاوبك
+                بدقة وبالدارجة المغربية. ✨
+              </p>
+            </div>
+          </>
+        )}
 
-        <div className="w-full bg-[#FBF6E9]/95 backdrop-blur-xl rounded-[26px] shadow-2xl overflow-hidden border-2 border-[#C1502E]/25 p-5 transition-all duration-300">
-          <form onSubmit={handleSubmit} className="relative">
+        {(response || loading) && (
+          <div className="px-8 mb-6">
+            <div className="rounded-3xl border border-gray-200 bg-gray-50 p-6">
+              {loading ? (
+                <div className="flex items-center gap-2 py-3">
+                  <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce"></span>
+                  <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-150"></span>
+                  <span className="w-2 h-2 rounded-full bg-gray-400 animate-bounce delay-300"></span>
+                </div>
+              ) : (
+                <p className="text-gray-700 leading-8 whitespace-pre-line">
+                  {response}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
+        <div className="px-6 pb-6">
+          <form
+            onSubmit={handleSubmit}
+            className="rounded-2xl border border-gray-200  shadow-md p-3"
+          >
             <textarea
+              rows={1}
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-              placeholder="Swwl qql haja hna... (e.g., Chno hwa l-asl dyal l-Heik?)"
-              className="w-full min-h-[140px] max-h-[320px] bg-transparent resize-y outline-none text-[#241C15] placeholder-[#241C15]/40 text-lg p-2 font-medium leading-relaxed"
-              style={{ fontFamily: "'Tajawal', sans-serif" }}
+              placeholder="اكتب سؤالك حول الثقافة المغربية..."
+              className={`w-full bg-transparent resize-none outline-none text-sm leading-6 min-h-[32px] max-h-32 ${
+                isLightMode
+                  ? "text-black-800 placeholder:text-gray-400"
+                  : "text-white-900 placeholder:text-white-400"
+              }`}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
+                if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
                   handleSubmit();
                 }
               }}
             />
 
-            <ZelligeSeam className="w-full h-3 text-[#C1502E]/25 my-1" />
-
-            {/* Action row */}
-            <div className="flex items-center justify-between pt-2">
+            <div className="flex items-center justify-between mt-3">
               <button
                 type="button"
-                className="p-2.5 text-[#241C15]/40 hover:text-[#C1502E] rounded-xl hover:bg-[#C1502E]/10 transition-colors"
-                aria-label="Zid chi haja"
+                className="w-9 h-9 rounded-full border border-gray-200 hover:bg-red-700 transition flex items-center justify-center text-gray-600"
               >
-                <FaPlus className="w-4 h-4" />
+                <FaMicrophone className="text-sm" color={"gray"} />
               </button>
-              <div className="flex items-center space-x-2">
-                <button
-                  type="button"
-                  className="p-2.5 text-[#241C15]/40 hover:text-[#C1502E] rounded-xl hover:bg-[#C1502E]/10 transition-colors"
-                  aria-label="Hdr b sut"
-                >
-                  <FaMicrophone className="w-4 h-4" />
-                </button>
-                <button
-                  type="submit"
-                  disabled={loading || !question.trim()}
-                  className={`p-3 rounded-2xl text-[#FBF6E9] transition-all duration-200 ${
-                    question.trim()
-                      ? 'bg-[#C1502E] hover:bg-[#a8431f] shadow-md scale-100 active:scale-95'
-                      : 'bg-[#241C15]/15 text-[#241C15]/30 cursor-not-allowed'
-                  }`}
-                  aria-label="Sift"
-                >
-                  {loading ? (
-                    <div className="w-4 h-4 border-2 border-[#FBF6E9] border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <FaArrowUp className="w-4 h-4" />
-                  )}
-                </button>
-              </div>
+
+              <button
+                type="submit"
+                disabled={!question.trim() || loading}
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                  question.trim() && !loading
+                    ? "bg-red-800 hover:scale-105 text-white shadow-md"
+                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                }`}
+              >
+                {loading ? (
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  <FaArrowUp className="text-sm" />
+                )}
+              </button>
             </div>
           </form>
+
+          {!hasStartedConversation && (
+            <>
+              {/* Suggestions */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-4">
+                <button
+                  onClick={() => setQuestion("شنو هي أشهر الأكلات المغربية؟")}
+                  className="rounded-xl border border-gray-200 px-3 py-2 text-xs hover:border-black hover:bg-gray-50 transition"
+                >
+                  🍲 أشهر الأكلات المغربية
+                </button>
+
+                <button
+                  onClick={() => setQuestion("عرفني بمدينة فاس")}
+                  className="rounded-xl border border-gray-200 px-3 py-2 text-xs hover:border-black hover:bg-gray-50 transition"
+                >
+                  🏛️ عرفني بمدينة فاس
+                </button>
+
+                <button
+                  onClick={() =>
+                    setQuestion("شنو هي العادات المغربية فالأعراس؟")
+                  }
+                  className="rounded-xl border border-gray-200 px-3 py-2 text-xs hover:border-black hover:bg-gray-50 transition"
+                >
+                  💍 العادات المغربية
+                </button>
+              </div>
+
+              {/* Footer */}
+              <div className="mt-6 text-center">
+                <p className="text-xs text-gray-400">
+                  Built with ❤️ by{" "}
+                  <a
+                    href="https://www.linkedin.com/in/abdellah-karani-965928294/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-gray-600 hover:text-black transition-colors"
+                  >
+                    Abdellah Karani
+                  </a>{" "}
+                  • Powered by{" "}
+                  <a
+                    href="https://huggingface.co/datasets/AtlasIA/Atlas-Dialogs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-yellow-600 hover:text-yellow-700 font-medium transition-colors"
+                  >
+                    🤗 Atlas AI Dataset
+                  </a>
+                </p>
+              </div>
+            </>
+          )}
         </div>
       </div>
-
-      {/* Answer */}
-      {response && (
-        <div className="w-full max-w-2xl mt-6 rounded-2xl shadow-xl text-left border border-[#D4A017]/30 overflow-hidden animate-fade-in">
-          <div className="h-1 bg-gradient-to-r from-[#D4A017] via-[#C1502E] to-[#1B4B66]" />
-          <div className="p-6 bg-[#1B4B66]/95 backdrop-blur-xl">
-            <div className="flex items-center space-x-2 text-[#D4A017] font-mono font-bold text-[11px] uppercase tracking-[0.2em] mb-3">
-              <LuSparkles className="w-4 h-4 animate-pulse" />
-              <span>Al-Jawab &middot; الجواب</span>
-            </div>
-            <p
-              className="text-[#F2E8D5] leading-relaxed text-base font-medium whitespace-pre-line"
-              style={{ fontFamily: "'Tajawal', sans-serif" }}
-            >
-              {response}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Footer */}
-      <div className="mt-9 bg-[#241C15]/30 backdrop-blur-md rounded-full px-5 py-2.5 border border-[#F2E8D5]/15 flex items-center justify-center space-x-2 max-w-md shadow-sm">
-        <span className="text-[11px] md:text-xs font-mono uppercase tracking-[0.15em] text-[#F2E8D5]/85">
-          Powered by Atlas Dataset &middot; Groq &amp; Qdrant Hybrid Search
-        </span>
-      </div>
-    </div>
+    </section>
   );
-}   
+}
