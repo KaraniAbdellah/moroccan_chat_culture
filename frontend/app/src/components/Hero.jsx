@@ -19,9 +19,9 @@ export default function Hero({ isLightMode }) {
     setQuestion("");
 
     try {
-      const API_URL = "http://127.0.0.1:8000/get-response";
+      const API_URL = "https://mcc-backend-docker-apc5bxhhcjgcbfe0.australiaeast-01.azurewebsites.net/get-response";
 
-      const res = await fetch(`http://0.0.0.0:8000/get-response`, {
+      const res = await fetch(`${API_URL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userQuestion }),
@@ -30,6 +30,7 @@ export default function Hero({ isLightMode }) {
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
+      console.log(userQuestion);
 
       const data = await res.json();
       setResponse(data.response || "No response from server");
