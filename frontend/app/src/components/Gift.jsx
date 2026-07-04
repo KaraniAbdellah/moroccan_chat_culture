@@ -50,7 +50,7 @@ export default function Gift({ isLightMode }) {
           </p>
 
           <a
-            href="https://huggingface.co/datasets/AtlasIA/Atlas-Dialogs"
+            href="https://huggingface.co/datasets/atlasia/Atlaset/viewer/default/train"
             target="_blank"
             rel="noreferrer"
             className={`block w-full font-semibold text-sm py-2.5 rounded-xl transition-colors text-center ${

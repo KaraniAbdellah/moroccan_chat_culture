@@ -60,7 +60,7 @@ export default function Hero({ isLightMode }) {
                 🤗
                 <span>Powered by</span>
                 <a
-                  href="https://huggingface.co/datasets/AtlasIA/Atlas-Dialogs"
+                  href="https://huggingface.co/atlasia"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold hover:underline"
@@ -196,7 +196,7 @@ export default function Hero({ isLightMode }) {
                   </a>{" "}
                   • Powered by{" "}
                   <a
-                    href="https://huggingface.co/datasets/AtlasIA/Atlas-Dialogs"
+                    href="https://huggingface.co/atlasia"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-yellow-600 hover:text-yellow-700 font-medium transition-colors"
